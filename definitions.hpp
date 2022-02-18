@@ -1,0 +1,2 @@
+#define BOARD_WIDTH 8
+#define BOARD_LENGTH 8

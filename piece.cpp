@@ -4,7 +4,7 @@
 typedef enum Team_t
 {
     white = 0,
-    black
+    black = 1
 } Team_t;
 
 typedef enum Type_t
@@ -26,6 +26,7 @@ class Piece
     }
 
     private:
+    char fenSymbol;
     Team_t team;
     Type_t type;
     int value;
