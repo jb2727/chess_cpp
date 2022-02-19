@@ -12,7 +12,7 @@ class Fen
 
     }
 
-    vector<string> extractBoardMap()
+    vector<string> extractBoardTemplate()
     {
         //raw fen pattern = rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
         string rawFenPattern = this->rawFenPattern;

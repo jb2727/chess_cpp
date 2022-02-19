@@ -1,2 +1,16 @@
 #define BOARD_WIDTH 8
 #define BOARD_LENGTH 8
+
+#define WHITE_KING_SYMBOL 'K'
+#define WHITE_QUEEN_SYMBOL 'Q'
+#define WHITE_ROOK_SYMBOL 'R'
+#define WHITE_BISHOP_SYMBOL 'B'
+#define WHITE_KNIGHT_SYMBOL 'N'
+#define WHITE_PAWN_SYMBOL 'P'
+
+#define BLACK_KING_SYMBOL 'k'
+#define BLACK_QUEEN_SYMBOL 'q'
+#define BLACK_ROOK_SYMBOL 'r'
+#define BLACK_BISHOP_SYMBOL 'b'
+#define BLACK_KNIGHT_SYMBOL 'n'
+#define BLACK_PAWN_SYMBOL 'P'

@@ -25,9 +25,33 @@ class Board
     }
     void setBoard(Fen input){
     //for x = 0...7: for y = 0...7 -> x
+    vector<string> boardTemplate = input.extractBoardTemplate();
         for (int x = 0; x < BOARD_WIDTH; x++){
             for (int y = 0; y < BOARD_LENGTH; y++){
+                switch(boardTemplate.at(x).at(y))
+                    case 'K':
 
+                    case 'k': 
+                    
+                    case 'Q': 
+
+                    case 'q': 
+
+                    case 'R': 
+                    
+                    case 'r': 
+
+                    case 'B': 
+                    
+                    case 'b': 
+
+                    case 'N': 
+                    
+                    case 'n': 
+
+                    case 'P': 
+                    
+                    case 'p': 
                 
                 
                 
@@ -36,12 +60,15 @@ class Board
             }
         }
     }
-    
-    vector<string> SplitStringToLis()
+
+
+
+/**
+    string* SplitStringtoList2()
     {
 
     }
-
+**/
     private:
     array<array<Piece, 8>, 8> boardMap;
     
