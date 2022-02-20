@@ -33,6 +33,23 @@ class Piece
     }
     bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos);
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
+    char getFenSymbol()
+    {
+        return fenSymbol;
+    }
+    piece_ns::Team_t getTeam()
+    {
+        return team;
+    }
+    piece_ns::Type_t getType()
+    {
+        return type;
+    }
+    int getValue()
+    {
+        return value;
+    }
+
     protected:
     char fenSymbol;
     piece_ns::Team_t team;
