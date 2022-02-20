@@ -1,6 +1,8 @@
 #include <string>
 #include "piece.hpp"
 #include "definitions.hpp"
+#include "coord.hpp"
+#include <cmath>
 
 
 /**
@@ -11,25 +13,9 @@
  * 
  */
 
-namespace piece_ns{
 
-typedef enum Team_t
-{
-    white = 0,
-    black = 1
-} Team_t;
 
-typedef enum Type_t
-{
-    king,
-    queen,
-    rook,
-    bishop,
-    knight,
-    pawn
-};
 
-}
 
 #define KING_VALUE 100
 #define QUEEN_VALUE 9 
@@ -45,7 +31,8 @@ class Piece
     {
         this->team = team;
     }
-
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos);
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
     protected:
     char fenSymbol;
     piece_ns::Team_t team;
@@ -55,7 +42,7 @@ class Piece
 };
 
 
-class King : Piece 
+class King : public Piece 
 {
     public:
     King(piece_ns::Team_t team) : Piece(team)
@@ -64,6 +51,18 @@ class King : Piece
         this->value = KING_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_KING_SYMBOL : BLACK_KING_SYMBOL;
     }
+    //check the post you made on the internet about this!!!
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        if (std::abs(startPos.X - endPos.X) > 1){
+            return false;
+        }
+        if (std::abs(startPos.Y - endPos.Y) > 1){
+            return false;
+        }
+        return true;
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
     private:
     
 };

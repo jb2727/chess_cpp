@@ -13,4 +13,4 @@
 #define BLACK_ROOK_SYMBOL 'r'
 #define BLACK_BISHOP_SYMBOL 'b'
 #define BLACK_KNIGHT_SYMBOL 'n'
-#define BLACK_PAWN_SYMBOL 'P'
+#define BLACK_PAWN_SYMBOL 'p'
