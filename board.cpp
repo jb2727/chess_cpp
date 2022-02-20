@@ -1,6 +1,7 @@
 #include <array>
 #include <vector>
 #include <string>
+#include <algorithm>
 #include "piece.hpp"
 #include "fen.hpp"
 #include "definitions.hpp"
@@ -55,6 +56,15 @@ class Board
     void setBoard(Fen input)
     {
 
+    //replace this with std::fill 
+    for (int x = 0; x < BOARD_WIDTH; x++)
+    {
+        for (int y = 0; y < BOARD_LENGTH; y++)
+        {
+            this->boardMap.at(x).at(y) = (Piece *)NULL;
+        }
+    }
+    
     //for x = 0...7: for y = 0...7 -> x
         vector<string> boardTemplate = input.extractBoardTemplate();
             for (int x = 0; x < BOARD_WIDTH; x++){
