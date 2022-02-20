@@ -54,6 +54,17 @@ class King : public Piece
     //check the post you made on the internet about this!!!
     bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
     {
+        return kingActionPattern(startPos, endPos);
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return kingActionPattern(startPos, endPos);
+    }
+
+    private:
+    //King (and every piece except Pawn) have the exact same movement patterns for movement and attack, therefore define a common method for both of them 
+    bool kingActionPattern(BoardCoord startPos, BoardCoord endPos)
+    {
         if (std::abs(startPos.X - endPos.X) > 1){
             return false;
         }
@@ -62,12 +73,9 @@ class King : public Piece
         }
         return true;
     }
-    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
-    private:
-    
 };
 
-class Queen : Piece
+class Queen : public Piece
 {
     public:
     Queen(piece_ns::Team_t team) : Piece(team)
@@ -76,11 +84,44 @@ class Queen : Piece
         this->value = QUEEN_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_QUEEN_SYMBOL : BLACK_QUEEN_SYMBOL;
     }
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return queenActionPattern(startPos, endPos);
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return queenActionPattern(startPos, endPos);
+    }
+
     private:
+    bool queenActionPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        //diagonal movement 
+        if (std::abs(startPos.X - endPos.X) == 
+            std::abs(startPos.Y - endPos.Y))
+            {
+            return true;
+            }
+        //orthagonal vertical movement
+        if (std::abs(startPos.Y - endPos.Y) > 0 &&
+            (std::abs(startPos.X - endPos.X) == 0))
+            {
+            return true;    
+            }
+        //orthagonal horizontal movement
+        if (std::abs(startPos.X - endPos.X) > 0 &&
+            (std::abs(startPos.Y - endPos.Y) == 0))
+            {
+            return true;    
+            }
+        
+        //movement is not diagonal or orthagonal
+        return false;
+    }
     
 };
 
-class Rook : Piece 
+class Rook : public Piece 
 {
     public:
     Rook(piece_ns::Team_t team) : Piece(team)
@@ -89,11 +130,38 @@ class Rook : Piece
         this->value = ROOK_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_ROOK_SYMBOL : BLACK_ROOK_SYMBOL;
     }
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return rookActionPattern(startPos, endPos);
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return rookActionPattern(startPos, endPos);
+    }
+
     private:
+    bool rookActionPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        //orthagonal vertical movement
+        if (std::abs(startPos.Y - endPos.Y) > 0 &&
+            (std::abs(startPos.X - endPos.X) == 0))
+            {
+            return true;    
+            }
+        //orthagonal horizontal movement
+        if (std::abs(startPos.X - endPos.X) > 0 &&
+            (std::abs(startPos.Y - endPos.Y) == 0))
+            {
+            return true;    
+            }
+        
+        //movement is not orthagonal
+        return false;
+    }
     
 };
 
-class Bishop : Piece
+class Bishop : public Piece
 {
     public:
     Bishop(piece_ns::Team_t team) : Piece(team)
@@ -102,11 +170,30 @@ class Bishop : Piece
         this->value = BISHOP_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_BISHOP_SYMBOL : BLACK_BISHOP_SYMBOL;
     }
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return bishopActionPattern(startPos, endPos);
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return bishopActionPattern(startPos, endPos);
+    }
+
     private:
-    
+    bool bishopActionPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        //diagonal movement 
+        if (std::abs(startPos.X - endPos.X) == 
+            std::abs(startPos.Y - endPos.Y))
+            {
+            return true;
+            }
+        //movement is not diagonal
+        return false;
+    }
 };
 
-class Knight : Piece 
+class Knight : public Piece 
 {
     public:
     Knight(piece_ns::Team_t team) : Piece(team)
@@ -115,11 +202,35 @@ class Knight : Piece
         this->value = KNIGHT_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_KNIGHT_SYMBOL : BLACK_KNIGHT_SYMBOL;
     }
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return knightActionPattern(startPos, endPos);
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        return knightActionPattern(startPos, endPos);
+    }
+
     private:
+    bool knightActionPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        if ((std::abs(startPos.Y - endPos.Y) == 2) &&
+            (std::abs(startPos.X - endPos.X) == 1))
+        {
+            return true;
+        }
+        if ((std::abs(startPos.Y - endPos.Y) == 1) &&
+            (std::abs(startPos.X - endPos.X) == 2))
+        {
+            return true;
+        }
+        //movement is not L shaped (2 in one direction, one in another direction)
+        return false;
+    }
     
 };
 
-class Pawn : Piece 
+class Pawn : public Piece 
 {
     public:
     Pawn(piece_ns::Team_t team) : Piece(team)
@@ -127,6 +238,26 @@ class Pawn : Piece
         this->type = piece_ns::pawn;
         this->value = PAWN_VALUE;
         this->fenSymbol = (piece_ns::white == this->team) ? WHITE_PAWN_SYMBOL : BLACK_PAWN_SYMBOL;
+    }
+    //unlike the other pieces, movement and attack patterns for pawns are different 
+    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+       if ((startPos.X == endPos.X) && 
+            (endPos.Y - startPos.Y == 1))
+       {
+           return true;
+       }
+       return false;
+    }
+    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos)
+    {
+        //note, en passant logic should be handled by board Module as the fundlemental movement pattern
+        if ((std::abs(endPos.X - startPos.X) == 1) &&
+            (endPos.Y - startPos.Y == 1))
+            {
+                return true;        
+            }
+        return false;
     }
     private:
     

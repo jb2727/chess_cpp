@@ -49,7 +49,7 @@ class Board
                         Piece* newPiece = new Knight(piece_ns::white);
                         break;
                     case WHITE_PAWN_SYMBOL: 
-                        Piece* newPiece = new Black(piece_ns::white);
+                        Piece* newPiece = new Pawn(piece_ns::white);
                         break;
 
                 /* Black Pieces*/
