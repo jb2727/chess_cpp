@@ -18,12 +18,40 @@ class Board
     {
 
     }
-    void movePiece(BoardCoord startPos, BoardCoord endPos){
-    //first check if movement is within movement pattern 
-    //second, check if there are any pieces inbetween the startingPos and the endingPos 
-    //lastly, make array(endPos) point to the Piece and array(startPos)
-    //make array(startPos point to NULL 
+
+    void movePiece(BoardCoord startPos, BoardCoord endPos)
+    {
+        //get piece at startPos
+        Piece * movingPiece = boardMap.at(startPos.X).at(startPos.Y);
+        Piece * targetPiece = boardMap.at(endPos.X).at(endPos.Y);
+        if (NULL == movingPiece)
+        {
+            throw "placeholder error, trying to move a piece that doesn't exist";
+        }
+        //check whether this is an attack or a move, then check if movement is within movement pattern 
+        //---
+        //note, there's no need to check whether the Piece at the target square is a King or not, because if the rest of the game functions as intended, then the
+        //will never be able to successfully capture a King (outside the movement pattern)
+        bool validMove = (NULL != targetPiece) ? movingPiece->ValidMovementPattern(startPos, endPos) : targetPiece->ValidAttackPattern(startPos, endPos);
+        if (false == validMove){
+            throw "placeholder error invalid movement pattern";
+        }
+        //
+        
+        //second, check if there are any pieces inbetween the startingPos and the endingPos
+        if (!(movingPiece->getType() == piece_ns::knight)) 
+        {
+            if (piecesInbetween(startPos, endPos))
+            {
+                throw "placeholder error pieces inbetween coordinates";
+            }
+        }
+        //lastly, make array(endPos) point to the Piece and array(startPos)
+        boardMap.at(endPos.X).at(endPos.Y) = boardMap.at(startPos.X).at(startPos.Y);
+        //make the original position NULL
+        boardMap.at(startPos.X).at(startPos.Y) = NULL;
     }
+
     void setBoard(Fen input){
     //for x = 0...7: for y = 0...7 -> x
     vector<string> boardTemplate = input.extractBoardTemplate();
@@ -94,5 +122,37 @@ class Board
 **/
     private:
     array<array<Piece* , 8>, 8> boardMap;
+
+    bool piecesInbetween(BoardCoord startPos, BoardCoord endPos)
+    {
+        //note, this code does not work for startPos and endPos that are not directly orthagonal or diagonal together. I don't think it needs to be so I'm content with leaving it like this
+        while(startPos.getAbsXDiff(endPos)>1 || startPos.getAbsYDiff(endPos)>1)
+        {
+            if (startPos.X<endPos.X)
+            {
+                startPos.X++;
+            }
+            else if (startPos.X>endPos.X)
+            {
+                endPos.X--;
+            }
+
+            if (startPos.Y<endPos.Y)
+            {
+                startPos.Y++;
+            }
+            else if (startPos.Y>endPos.Y)
+            {
+                endPos.Y--;
+            }
+        if (NULL != this->boardMap.at(startPos.X).at(startPos.Y))
+        {
+            return true;
+        }
+        }
+        return false;
+        //all piecese move in a either a diagonal or orthagonal fashion, only need to examine cases where diffx = 0 or diffx = diffy & diffy = 0 or diffy = diffx
+        
+    }
     
 };

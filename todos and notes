@@ -1,1 +1,2 @@
 it would be a good idea to add the explicit keyword?
+added functionality to coord struct, should probably turn it into a class

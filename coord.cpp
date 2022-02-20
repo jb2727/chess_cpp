@@ -3,6 +3,14 @@
 struct Coord 
 {
     public:
+    int getAbsXDiff(Coord newPos)
+    {
+        return std::abs(this->X - newPos.X);
+    }
+    int getAbsYDiff(Coord newPos)
+    {
+        return std::abs(this->Y - newPos.Y);
+    }
     int X;
     int Y;
 };
@@ -20,7 +28,7 @@ struct BoardCoord : public Coord
             error_message << "invalid arguments, coordinates: " << X << "and" << Y << 
             "must be less than the board's width: " << BOARD_WIDTH << 
             "and the board's length:" << BOARD_LENGTH << "respectively" << std::endl;
-            
+
             throw std::invalid_argument(error_message.str());
         }
         this->X = X;

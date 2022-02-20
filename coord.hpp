@@ -5,6 +5,8 @@
 
 struct Coord 
 {
+    int getAbsXDiff(Coord newPos);
+    int getAbsYDiff(Coord newPos);
     public:
     int X;
     int Y;
