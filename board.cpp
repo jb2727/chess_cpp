@@ -72,7 +72,11 @@ class Board
                         Piece* newPiece = new Pawn(piece_ns::black);
                         break;
                     default:
-                        //throw custom error relating to corrupted boardmap 
+                        std::ostringstream error_message;
+
+                        error_message << "Fen boardMap is corrupted" << std::endl;
+                        //note to self: print out entire boardMap for debugging reasons
+                        throw std::invalid_argument(error_message.str());
                         break;
                 this->boardMap.at(x).at(y) = newPiece;
                 }

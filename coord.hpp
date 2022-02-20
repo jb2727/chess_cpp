@@ -1,5 +1,7 @@
 #include "definitions.hpp"
 #include <stdexcept>
+#include <iostream>
+#include <sstream>
 
 struct Coord 
 {

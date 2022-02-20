@@ -15,8 +15,13 @@ struct BoardCoord : public Coord
     {  
         if (X > BOARD_WIDTH || Y > BOARD_LENGTH) 
         {
-            throw std::invalid_argument("invalid argument"); 
+            std::ostringstream error_message;
 
+            error_message << "invalid arguments, coordinates: " << X << "and" << Y << 
+            "must be less than the board's width: " << BOARD_WIDTH << 
+            "and the board's length:" << BOARD_LENGTH << "respectively" << std::endl;
+            
+            throw std::invalid_argument(error_message.str());
         }
         this->X = X;
         this->Y = Y;
