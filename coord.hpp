@@ -17,4 +17,15 @@ struct BoardCoord : Coord
 {
     public:
     BoardCoord(int X, int Y);
+    BoardCoord(char xAxis, int yAxis);
+};
+
+struct EnPassantCoord : public BoardCoord 
+{
+    public: 
+    EnPassantCoord(int X = 0, int Y = 0);
+    EnPassantCoord(char xAxis, int yAxis);
+    bool enPassant;
+
+
 };

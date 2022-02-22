@@ -1,6 +1,8 @@
 #define BOARD_WIDTH 8
 #define BOARD_LENGTH 8
 
+#define STARTING_FEN_POSITION "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 #define WHITE_KING_SYMBOL 'K'
 #define WHITE_QUEEN_SYMBOL 'Q'
 #define WHITE_ROOK_SYMBOL 'R'
