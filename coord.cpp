@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//perhaps these should be made static and go into Coord? 
 map<char, int> x_AxisCharToIndex = 
 {
     {'a', 0},
@@ -88,9 +89,8 @@ struct EnPassantCoord : public BoardCoord
 {
     public: 
     
-    EnPassantCoord(int X = 0, int Y = 0) : BoardCoord(X, Y){}
+    EnPassantCoord(int X, int Y ) : BoardCoord(X, Y){}
     EnPassantCoord(char xAxis, char yAxis) : BoardCoord(xAxis, yAxis){}
-
     bool enPassantCoord;
 
 

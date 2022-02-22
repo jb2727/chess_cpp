@@ -66,7 +66,7 @@ class Board
     }
     
     //for x = 0...7: for y = 0...7 -> x
-        vector<string> boardTemplate = input.extractBoardTemplate();
+        vector<string> boardTemplate = input.ExtractBoardTemplate();
             for (int x = 0; x < BOARD_WIDTH; x++){
                 for (int y = 0; y < BOARD_LENGTH; y++){
                     

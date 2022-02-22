@@ -3,6 +3,7 @@
 #include <vector>
 #include <array>
 #include "coord.hpp"
+#include <memory>
 
 using namespace std;
 
@@ -19,12 +20,13 @@ using namespace std;
 #define NO_ENPASSANT_INDICATOR "-"
 
 
-typedef struct CastleStatus
+
+struct CastleStatus
     {
-        bool whiteKingSide;
-        bool whiteQueenSide;
-        bool blackKingSide;
-        bool blackQueenSide;
+    bool whiteKingSide = false;
+    bool whiteQueenSide = false;
+    bool blackKingSide = false;
+    bool blackQueenSide = false;
     };
 
 //NOTE: THIS ENTIRE CLASS NEEDS SOME SERIOUS REFACTORING, IT IS NOT CONSISTENT, AND EACH MEMBER FUNCTION IS DOING WAY TOO MUCH
@@ -34,10 +36,36 @@ class Fen
     Fen(string rawFenPattern)
     {
         this->rawFenPattern;
+        this->castling.reset(new CastleStatus());
         setFenConfigurations();
     }
 
-    vector<string> extractBoardTemplate()
+    //getters
+    char GetTurnIndicator()
+    {   
+        return turnIndicator;
+    }
+    //WARNING - BE VERY CAREFUL WITH THE IMPLICATIONS OF THESE TWO FUNCTIONS
+    //getting the pointer to the object and unqiue_ptr<T>.reset(ptr)'ing it in another object *might* lead to undefined behaviour when referencing the pointer in this object, make sure this does not happen!
+    CastleStatus * GetCastling()
+    {
+        return castling.get();
+    }
+    EnPassantCoord * GetEnPassantSquare()
+    {
+        return enPassantSquare.get();
+    }
+    int GetConseqNoPawnMoves()
+    {
+        return conseqNoPawnMoves;
+    }
+    int GetMoveNumber()
+    {
+        return moveNumber;
+    }
+
+
+    vector<string> ExtractBoardTemplate()
     {
         //raw fen pattern = rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
         string rawFenPattern = this->rawFenPattern;
@@ -102,27 +130,26 @@ class Fen
                 }
                 if (castleIndicatorOrder[orderIndicatorIndex-1].compare(WHITE_KINGSIDE_CASTLE_INDICATOR) == 0)
                 {
-                    castling.whiteKingSide = true;
+                    castling->whiteKingSide = true;
                 }
                 else if (castleIndicatorOrder[orderIndicatorIndex-1].compare(WHITE_QUEENSIDE_CASTLE_INDICATOR) == 0)
                 {
-                    castling.whiteQueenSide = true;
+                    castling->whiteQueenSide = true;
                 }
                 else if (castleIndicatorOrder[orderIndicatorIndex-1].compare(BLACK_KINGSIDE_CASTLE_INDICATOR) == 0)
                 {
-                    castling.blackKingSide = true;
+                    castling->blackKingSide = true;
                 }
                 else if (castleIndicatorOrder[orderIndicatorIndex-1].compare(BLACK_QUEENSIDE_CASTLE_INDICATOR) == 0)
                 {
-                    castling.blackQueenSide = true;
+                    castling->blackQueenSide = true;
                 }
             }
         }
         //set up enPassantSquare
         rawFenPattern.erase(0,rawFenPattern.find(' '));
         string enPassantPattern = rawFenPattern.substr(0, rawFenPattern.find(' '));
-        EnPassantCoord enPassant(enPassantPattern[0], enPassantPattern[1]);
-        this->enPassantSquare = enPassantSquare;
+        this->enPassantSquare.reset(new EnPassantCoord(enPassantPattern[0], enPassantPattern[1]));
 
         //set conseqNoPawnMoves
         rawFenPattern.erase(0,rawFenPattern.find(' '));
@@ -139,8 +166,8 @@ class Fen
     private:
     string rawFenPattern;
     char turnIndicator;
-    CastleStatus castling;
-    EnPassantCoord enPassantSquare; 
+    unique_ptr<CastleStatus> castling;
+    unique_ptr<EnPassantCoord> enPassantSquare; 
     int conseqNoPawnMoves;
     int moveNumber;
 
