@@ -50,6 +50,7 @@ class King : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
+    bool King::kingActionPattern(BoardCoord startPos, BoardCoord endPos);
     
 };
 
@@ -61,7 +62,7 @@ class Queen : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
-    
+    bool queenActionPattern(BoardCoord startPos, BoardCoord endPos);
 };
 
 class Rook : public Piece 
@@ -72,7 +73,7 @@ class Rook : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
-    
+    bool rookActionPattern(BoardCoord startPos, BoardCoord endPos);
 };
 
 class Bishop : public Piece 
@@ -83,7 +84,7 @@ class Bishop : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
-    
+    bool bishopActionPattern(BoardCoord startPos, BoardCoord endPos);
 };
 
 class Knight : public Piece 
@@ -94,6 +95,7 @@ class Knight : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
+    bool knightActionPattern(BoardCoord startPos, BoardCoord endPos);
     
 };
 

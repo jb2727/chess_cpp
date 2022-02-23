@@ -9,15 +9,17 @@ using namespace std;
 
 struct CastleStatus
     {
-    bool whiteKingSide;
-    bool whiteQueenSide;
-    bool blackKingSide;
-    bool blackQueenSide;
+    bool whiteKingSide = false;
+    bool whiteQueenSide = false;
+    bool blackKingSide = false;
+    bool blackQueenSide = false;
     };
 
 class Fen{
+
     public:
-    static const string DEFAULT_FEN;
+    //const static string ;
+    //static const string DEFAULT_FEN;
     Fen(string rawFenPattern);
     char GetTurnIndicator();
     CastleStatus * GetCastling();
@@ -26,6 +28,13 @@ class Fen{
     int GetMoveNumber();
     vector<string> ExtractBoardTemplate();
     private:
+    void setFenConfigurations();
+    string rawFenPattern;
+    char turnIndicator;
+    unique_ptr<CastleStatus> castling;
+    unique_ptr<EnPassantCoord> enPassantSquare; 
+    int conseqNoPawnMoves;
+    int moveNumber;
 
 };
 

@@ -18,4 +18,6 @@
 #define BLACK_KNIGHT_SYMBOL 'n'
 #define BLACK_PAWN_SYMBOL 'p'
 
+#define DEFAULT_FEN "kbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+
 #endif

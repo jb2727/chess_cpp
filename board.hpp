@@ -18,9 +18,9 @@ class Board
 {
 
     public:
-    Board(Fen startState);
+    Board(Fen * startState);
     void movePiece(BoardCoord startPos, BoardCoord endPos);
-    void setBoard(Fen input);
+    void setBoard(Fen * input);
 
     private:
     array<array<Piece* , 8>, 8> boardMap;

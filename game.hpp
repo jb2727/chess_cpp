@@ -10,11 +10,11 @@ using namespace std;
 
 class Game
 {
-public:
-    Game(Fen StartingPosition);
+    public:
+    Game(Fen * StartingPosition);
 
-private:
-    void constructInternalParams(Fen boardDescription);
+    private:
+    void constructInternalParams(Fen * boardDescription);
     char turn;
     unique_ptr<CastleStatus> castle;
     unique_ptr<Coord> enPassantSquare;

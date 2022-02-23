@@ -2,16 +2,14 @@
 
 using namespace std;
 
-class Board
-{
 
-    public:
-    Board(Fen startState)
+    
+    Board::Board(Fen * startState)
     {
         setBoard(startState);
     }
 
-    void movePiece(BoardCoord startPos, BoardCoord endPos)
+    void Board::movePiece(BoardCoord startPos, BoardCoord endPos)
     {
         //get piece at startPos
         Piece * movingPiece = boardMap.at(startPos.X).at(startPos.Y);
@@ -44,7 +42,7 @@ class Board
         boardMap.at(startPos.X).at(startPos.Y) = NULL;
     }
 
-    void setBoard(Fen input)
+    void Board::setBoard(Fen * input)
     {
 
     //replace this with std::fill 
@@ -57,7 +55,7 @@ class Board
     }
     
     //for x = 0...7: for y = 0...7 -> x
-        vector<string> boardTemplate = input.ExtractBoardTemplate();
+        vector<string> boardTemplate = input->ExtractBoardTemplate();
             for (int x = 0; x < BOARD_WIDTH; x++){
                 for (int y = 0; y < BOARD_LENGTH; y++){
                     
@@ -115,12 +113,7 @@ class Board
             }
     }
 
-
-
-    private:
-    array<array<Piece* , 8>, 8> boardMap;
-
-    bool piecesInbetween(BoardCoord startPos, BoardCoord endPos)
+    bool Board::piecesInbetween(BoardCoord startPos, BoardCoord endPos)
     {
         //note, this code does not work for startPos and endPos that are not directly orthagonal or diagonal together. I don't think it needs to be so I'm content with leaving it like this
         while(startPos.getAbsXDiff(endPos)>1 || startPos.getAbsYDiff(endPos)>1)
@@ -152,4 +145,3 @@ class Board
         
     }
     
-};
