@@ -1,3 +1,6 @@
+#ifndef GAME_HPP
+#define GAME_HPP
+
 #include "fen.hpp"
 #include "board.hpp"
 #include "coord.hpp"
@@ -20,4 +23,4 @@ private:
     unique_ptr<Board> board;
 };
 
-
+#endif

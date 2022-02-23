@@ -1,14 +1,18 @@
+#ifndef PIECE_HPP 
+#define PIECE_HPP
+
 #include "definitions.hpp"
+#include "coord.hpp"
 
 namespace piece_ns{
 
-typedef enum Team_t
+enum Team_t
 {
     white = 0,
     black = 1
-} Team_t;
+};
 
-typedef enum Type_t
+enum Type_t
 {
     king,
     queen,
@@ -103,3 +107,5 @@ class Pawn : public Piece
     private:
     
 };
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef COORD_HPP
+#define COORD_HPP
+
 #include "definitions.hpp"
 #include <stdexcept>
 #include <iostream>
@@ -5,9 +8,9 @@
 
 struct Coord 
 {
+    public:
     int getAbsXDiff(Coord newPos);
     int getAbsYDiff(Coord newPos);
-    public:
     int X;
     int Y;
 };
@@ -29,3 +32,5 @@ struct EnPassantCoord : public BoardCoord
 
 
 };
+
+#endif

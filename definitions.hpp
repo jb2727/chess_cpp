@@ -1,7 +1,8 @@
+#ifndef DEFINITIONS_HPP
+#define DEFINITIONS_HPP
+
 #define BOARD_WIDTH 8
 #define BOARD_LENGTH 8
-
-#define STARTING_FEN_POSITION "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
 #define WHITE_KING_SYMBOL 'K'
 #define WHITE_QUEEN_SYMBOL 'Q'
@@ -16,3 +17,5 @@
 #define BLACK_BISHOP_SYMBOL 'b'
 #define BLACK_KNIGHT_SYMBOL 'n'
 #define BLACK_PAWN_SYMBOL 'p'
+
+#endif

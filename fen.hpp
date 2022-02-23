@@ -1,3 +1,6 @@
+#ifndef FEN_HPP
+#define FEN_HPP
+
 #include <vector>
 #include <string>
 
@@ -25,3 +28,5 @@ class Fen{
     private:
 
 };
+
+#endif
