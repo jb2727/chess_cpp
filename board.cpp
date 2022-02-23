@@ -1,15 +1,6 @@
-#include <array>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include "piece.hpp"
-#include "fen.hpp"
-#include "definitions.hpp"
-#include "coord.hpp"
+#include "board.hpp"
 
 using namespace std;
-
-
 
 class Board
 {
@@ -126,12 +117,6 @@ class Board
 
 
 
-/**
-    string* SplitStringtoList2()
-    {
-
-    }
-**/
     private:
     array<array<Piece* , 8>, 8> boardMap;
 

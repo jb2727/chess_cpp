@@ -16,7 +16,6 @@ using namespace std;
 #define BLACK_KINGSIDE_CASTLE_INDICATOR "k"
 #define BLACK_QUEENSIDE_CASTLE_INDICATOR "q"
 #define NO_CASTLE_INDICATOR "-"
-
 #define NO_ENPASSANT_INDICATOR "-"
 
 
@@ -35,10 +34,13 @@ class Fen
     public:
     Fen(string rawFenPattern)
     {
+        
         this->rawFenPattern;
         this->castling.reset(new CastleStatus());
         setFenConfigurations();
     }
+
+    const string DEFAULT_FEN = "kbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     //getters
     char GetTurnIndicator()

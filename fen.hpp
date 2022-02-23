@@ -14,7 +14,8 @@ struct CastleStatus
 
 class Fen{
     public:
-    Fen();
+    static const string DEFAULT_FEN;
+    Fen(string rawFenPattern);
     char GetTurnIndicator();
     CastleStatus * GetCastling();
     EnPassantCoord * GetEnPassantSquare();
