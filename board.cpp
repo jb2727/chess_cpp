@@ -58,48 +58,72 @@ using namespace std;
         vector<string> boardTemplate = input->ExtractBoardTemplate();
             for (int x = 0; x < BOARD_WIDTH; x++){
                 for (int y = 0; y < BOARD_LENGTH; y++){
-                    
-                    switch(boardTemplate.at(x).at(y)){
+                    Piece* newPiece;
+                    switch(boardTemplate.at(x).at(y))
+                    {
                     
                     /* White Pieces */    
                         case WHITE_KING_SYMBOL:
-                            Piece* newPiece = new King(piece_ns::white);
+                        {
+                            newPiece = new King(piece_ns::white);
                             break;
+                        }
                         case WHITE_QUEEN_SYMBOL: 
-                            Piece* newPiece = new Queen(piece_ns::white);
+                        {
+                            newPiece = new Queen(piece_ns::white);
                             break;
+                        }
                         case WHITE_ROOK_SYMBOL: 
-                            Piece* newPiece = new Rook(piece_ns::white);
+                        {
+                            newPiece = new Rook(piece_ns::white);
                             break;
+                        }
                         case WHITE_BISHOP_SYMBOL: 
-                            Piece* newPiece = new Bishop(piece_ns::white);
+                        {
+                            newPiece = new Bishop(piece_ns::white);
                             break;
+                        }
                         case WHITE_KNIGHT_SYMBOL: 
-                            Piece* newPiece = new Knight(piece_ns::white);
+                        {
+                            newPiece = new Knight(piece_ns::white);
                             break;
+                        }
                         case WHITE_PAWN_SYMBOL: 
-                            Piece* newPiece = new Pawn(piece_ns::white);
+                        {
+                            newPiece = new Pawn(piece_ns::white);
                             break;
-
+                        }
                     /* Black Pieces*/
                         case BLACK_KING_SYMBOL: 
-                            Piece* newPiece = new King(piece_ns::black);
+                        { 
+                            newPiece = new King(piece_ns::black);
                             break;
+                        }
                         case BLACK_QUEEN_SYMBOL: 
-                            Piece* newPiece = new Queen(piece_ns::black);
+                        {
+                            newPiece = new Queen(piece_ns::black);
                             break;
+                        }
                         case BLACK_ROOK_SYMBOL: 
-                            Piece* newPiece = new Rook(piece_ns::black);
+                        {
+                            newPiece = new Rook(piece_ns::black);
                             break;
+                        }
                         case BLACK_BISHOP_SYMBOL: 
-                            Piece* newPiece = new Bishop(piece_ns::black);
+                        {
+                            newPiece = new Bishop(piece_ns::black);
                             break;
+                        }
                         case BLACK_KNIGHT_SYMBOL: 
-                            Piece* newPiece = new Knight(piece_ns::black);
+                        {
+                            newPiece = new Knight(piece_ns::black);
                             break;
+                        }
                         case BLACK_PAWN_SYMBOL: 
-                            Piece* newPiece = new Pawn(piece_ns::black);
+                        {
+                            newPiece = new Pawn(piece_ns::black);
                             break;
+                        }
                         default:
                             std::ostringstream error_message;
 

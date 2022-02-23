@@ -2,3 +2,4 @@ it would be a good idea to add the explicit keyword?
 added functionality to coord struct, should probably turn it into a class
 need to add std::fill for boardMap, STL is good :) 
 I should probably get rid of all the #defines and replace them with class::static const variable
+In Piece.cpp, I should think about using smart pointers for the newPiece

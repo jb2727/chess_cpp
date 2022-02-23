@@ -5,13 +5,16 @@
 #include <stdexcept>
 #include <iostream>
 #include <sstream>
+#include <array>
+
+using namespace std;
 
 struct Coord 
 {
     public:
     int getAbsXDiff(Coord newPos);
     int getAbsYDiff(Coord newPos);
-    static array<int,2> Coord::convertStringCoordsToInts(char x_axis, char y_axis);
+    static array<int,2> convertStringCoordsToInts(char x_axis, char y_axis);
     int X;
     int Y;
     
@@ -30,8 +33,8 @@ struct BoardCoord : public Coord
 struct EnPassantCoord : public BoardCoord 
 {
     public: 
-    EnPassantCoord(int X = 0, int Y = 0);
-    EnPassantCoord(char xAxis, char yAxis);
+    EnPassantCoord(int X, int Y, bool enPassant);
+    EnPassantCoord(char xAxis, char yAxis, bool enPassant);
     bool enPassant;
 
 

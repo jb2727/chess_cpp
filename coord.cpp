@@ -78,5 +78,10 @@ void BoardCoord::setCoords(int X, int Y)
 
 
 
-EnPassantCoord::EnPassantCoord(int X, int Y ) : BoardCoord(X, Y){}
-EnPassantCoord::EnPassantCoord(char xAxis, char yAxis) : BoardCoord(xAxis, yAxis){}
+EnPassantCoord::EnPassantCoord(int X, int Y, bool enPassant) : BoardCoord(X, Y)
+{
+    this->enPassant = enPassant;
+}
+EnPassantCoord::EnPassantCoord(char xAxis, char yAxis, bool enPassant) : BoardCoord(xAxis, yAxis){
+    this->enPassant = enPassant;
+}

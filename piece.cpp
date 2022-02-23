@@ -23,6 +23,7 @@
 #define BISHOP_VALUE 3
 #define KNIGHT_VALUE 3
 #define PAWN_VALUE 1
+#define NO_PIECE_VALUE 0
 
 
 
@@ -30,6 +31,7 @@ Piece::Piece(piece_ns::Team_t team)
 {
     this->team = team;
 }
+
 
 char Piece::getFenSymbol()
 {

@@ -9,7 +9,8 @@ namespace piece_ns{
 enum Team_t
 {
     white = 0,
-    black = 1
+    black = 1,
+    noteam
 };
 
 enum Type_t
@@ -19,7 +20,8 @@ enum Type_t
     rook,
     bishop,
     knight,
-    pawn
+    pawn,
+    notype
 };
 }
 
@@ -35,10 +37,10 @@ class Piece
     int getValue();
 
     protected:
-    char fenSymbol;
-    piece_ns::Team_t team;
-    piece_ns::Type_t type;
-    int value;
+    char fenSymbol = '\0';
+    piece_ns::Team_t team = piece_ns::noteam;
+    piece_ns::Type_t type = piece_ns::notype;
+    int value = 0;
     
 };
 
@@ -50,7 +52,7 @@ class King : public Piece
     bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
 
     private:
-    bool King::kingActionPattern(BoardCoord startPos, BoardCoord endPos);
+    bool kingActionPattern(BoardCoord startPos, BoardCoord endPos);
     
 };
 
