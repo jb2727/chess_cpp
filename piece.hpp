@@ -29,8 +29,8 @@ class Piece
 {
     public:
     Piece(piece_ns::Team_t team);
-    bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos);
-    bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos);
+    virtual bool ValidMovementPattern(BoardCoord startPos, BoardCoord endPos) = 0;
+    virtual bool ValidAttackPattern(BoardCoord startPos, BoardCoord endPos) = 0;
     char getFenSymbol();
     piece_ns::Team_t getTeam();
     piece_ns::Type_t getType();

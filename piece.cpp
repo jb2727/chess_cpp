@@ -37,7 +37,10 @@ char Piece::getFenSymbol()
 {
     return fenSymbol;
 }
-
+/**
+bool Piece::ValidMovementPattern(BoardCoord startPos, BoardCoord endPos){}
+bool Piece::ValidAttackPattern(BoardCoord startPos, BoardCoord endPos){}
+**/
 piece_ns::Team_t Piece::getTeam()
 {
     return team;

@@ -132,10 +132,10 @@ void Fen::setFenConfigurations()
             }
         }
     }
-    //set up enPassantSquare
+    //set up enPassantSquare -- note to self, need to add in logic if there is no en passant;
     rawFenPattern.erase(0,rawFenPattern.find(' '));
     string enPassantPattern = rawFenPattern.substr(0, rawFenPattern.find(' '));
-    this->enPassantSquare.reset(new EnPassantCoord(enPassantPattern[0], enPassantPattern[1]));
+    this->enPassantSquare.reset(new EnPassantCoord(enPassantPattern[0], enPassantPattern[1], true));
 
     //set conseqNoPawnMoves
     rawFenPattern.erase(0,rawFenPattern.find(' '));
