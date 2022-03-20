@@ -36,8 +36,6 @@ struct EnPassantCoord : public BoardCoord
     EnPassantCoord(int X, int Y, bool enPassant);
     EnPassantCoord(char xAxis, char yAxis, bool enPassant);
     bool enPassant;
-
-
 };
 
 #endif

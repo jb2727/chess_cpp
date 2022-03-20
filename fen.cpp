@@ -22,8 +22,7 @@ using namespace std;
 
 Fen::Fen(string rawFenPattern)
 {
-    
-    this->rawFenPattern;
+    this->rawFenPattern = rawFenPattern;
     this->castling.reset(new CastleStatus());
     setFenConfigurations();
 }
@@ -54,7 +53,7 @@ int Fen::GetMoveNumber()
 vector<string> Fen::ExtractBoardTemplate()
 {
     //raw fen pattern = rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-    string rawFenPattern = this->rawFenPattern;
+    string rawFenPattern(this->rawFenPattern);
     vector<string> splitFen;
     string segment;
     
@@ -76,9 +75,9 @@ vector<string> Fen::ExtractBoardTemplate()
 
 void Fen::setFenConfigurations()
 {
-    string rawFenPattern = this->rawFenPattern;
-    rawFenPattern.erase(0,rawFenPattern.find(' '));
-    string turnIndicator = rawFenPattern.substr(0, rawFenPattern.find(' '));
+    string rawFenPattern(this->rawFenPattern);
+    rawFenPattern.erase(0,rawFenPattern.find(' ')+1);
+    string turnIndicator(rawFenPattern.substr(0, rawFenPattern.find(' ')));
     //validate turnIndicator 
     if ((turnIndicator.compare(WHITE_TURN_INDICATOR) != 0) &&
         (turnIndicator.compare(BLACK_TURN_INDICATOR) != 0))
@@ -93,7 +92,7 @@ void Fen::setFenConfigurations()
     //no repeats 
 
     //extract castle indicators 
-    rawFenPattern.erase(0,rawFenPattern.find(' '));
+    rawFenPattern.erase(0,rawFenPattern.find(' ')+1);
     string castleIndicators = rawFenPattern.substr(0, rawFenPattern.find(' '));
     
     array<string, 4> castleIndicatorOrder = {WHITE_KINGSIDE_CASTLE_INDICATOR,WHITE_QUEENSIDE_CASTLE_INDICATOR,BLACK_KINGSIDE_CASTLE_INDICATOR, BLACK_QUEENSIDE_CASTLE_INDICATOR}; //note, should this be a char instead? 
@@ -105,12 +104,14 @@ void Fen::setFenConfigurations()
         {   
             if (orderIndicatorIndex >= castleIndicatorOrder.size())
                 {
+                    printf("hello");
                     throw "placeholder error castle indicators contained invalid or out of order symbols";
                 }
             while( castleIndicators.find(castleIndicatorOrder[orderIndicatorIndex++], i) == string::npos )
             {
                 if (orderIndicatorIndex >= castleIndicatorOrder.size())
                 {
+                    printf("hello2");
                     throw "placeholder error castle indicators contained invalid or out of order symbols";
                 }
             }
@@ -133,17 +134,25 @@ void Fen::setFenConfigurations()
         }
     }
     //set up enPassantSquare -- note to self, need to add in logic if there is no en passant;
-    rawFenPattern.erase(0,rawFenPattern.find(' '));
+    rawFenPattern.erase(0,rawFenPattern.find(' ')+1);
     string enPassantPattern = rawFenPattern.substr(0, rawFenPattern.find(' '));
-    this->enPassantSquare.reset(new EnPassantCoord(enPassantPattern[0], enPassantPattern[1], true));
+    if (NO_ENPASSANT_INDICATOR == enPassantPattern)
+    {
+        this->enPassantSquare = NULL;
+    }
+    else if (2 == enPassantPattern.size())
+    {
+        this->enPassantSquare.reset(new EnPassantCoord(enPassantPattern[0], enPassantPattern[1], true));
+    }
+    
 
     //set conseqNoPawnMoves
-    rawFenPattern.erase(0,rawFenPattern.find(' '));
+    rawFenPattern.erase(0,rawFenPattern.find(' ')+1);
     string conseqNoPawnMoves = rawFenPattern.substr(0, rawFenPattern.find(' '));
     this->conseqNoPawnMoves = stoi(conseqNoPawnMoves);
 
     //set move Number
-    rawFenPattern.erase(0,rawFenPattern.find(' '));
+    rawFenPattern.erase(0,rawFenPattern.find(' ')+1);
     string moveNumber = rawFenPattern.substr(0, rawFenPattern.find(' '));
     this->moveNumber = stoi(moveNumber);
 
