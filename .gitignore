@@ -1,1 +1,7 @@
 *.o
+
+
+build/
+DEPRECATED_makefile
+make_build.sh
+build.sh
